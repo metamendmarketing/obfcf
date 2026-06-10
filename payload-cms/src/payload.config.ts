@@ -1,4 +1,5 @@
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -22,17 +23,23 @@ export default buildConfig({
   },
   collections: [Users, Media, Projects],
   globals: [SiteSettings],
-  cors: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'],
+  cors: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', process.env.FRONTEND_URL].filter(Boolean) as string[],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URL || '',
-    },
-  }),
+  db: process.env.POSTGRES_URL 
+    ? postgresAdapter({
+        pool: {
+          connectionString: process.env.POSTGRES_URL,
+        },
+      })
+    : sqliteAdapter({
+        client: {
+          url: process.env.DATABASE_URL || 'file:./payload-cms.db',
+        },
+      }),
   sharp,
   plugins: [],
 })
