@@ -29,10 +29,10 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: process.env.POSTGRES_URL 
+  db: (process.env.POSTGRES_URL || (process.env.DATABASE_URL && process.env.DATABASE_URL.startsWith('postgres')))
     ? postgresAdapter({
         pool: {
-          connectionString: process.env.POSTGRES_URL,
+          connectionString: process.env.POSTGRES_URL || process.env.DATABASE_URL || '',
         },
       })
     : sqliteAdapter({
