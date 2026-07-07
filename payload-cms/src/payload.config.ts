@@ -23,7 +23,7 @@ export default buildConfig({
   },
   collections: [Users, Media, Projects],
   globals: [SiteSettings],
-  cors: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', process.env.FRONTEND_URL].filter(Boolean) as string[],
+  cors: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'https://oakbayfirefighterscharitable.com', 'https://www.oakbayfirefighterscharitable.com', process.env.FRONTEND_URL].filter(Boolean) as string[],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

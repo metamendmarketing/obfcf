@@ -1,0 +1,615 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+  --primary: #262626;
+  --primary-foreground: #fafafa;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #262626;
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+  --accent: #f5f5f5;
+  --accent-foreground: #262626;
+  --destructive: #ef4444;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #a3a3a3;
+  --radius: 0.35rem;
+}
+
+.dark {
+  /* Very dark navy/black background */
+  --background: #050505;
+  --foreground: #fafafa;
+  
+  /* Cards are slightly lighter for contrast, often with a hint of purple/navy */
+  --card: #0c0d1c;
+  --card-foreground: #fafafa;
+  
+  --popover: #0c0d1c;
+  --popover-foreground: #fafafa;
+  
+  /* Vibrant indigo/purple for primary actions */
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+  
+  --secondary: #1e1b4b;
+  --secondary-foreground: #fafafa;
+  
+  --muted: #1e1e24;
+  --muted-foreground: #a1a1aa;
+  
+  --accent: #1e1b4b;
+  --accent-foreground: #fafafa;
+  
+  --destructive: #ef4444;
+  
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: #6366f1;
+  --radius: 0.35rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom premium utility classes */
+@layer utilities {
+  .bg-gradient-primary {
+    @apply bg-gradient-to-r from-[#6366f1] to-[#a855f7];
+  }
+  .bg-glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500;
+  }
+  .text-primary-blue, .text-primary-blue * { color: #356af9 !important; }
+  .text-secondary-purple, .text-secondary-purple * { color: #a774fd !important; }
+  .text-pure-white, .text-pure-white * { color: #ffffff !important; }
+  .text-deep-black, .text-deep-black * { color: #0A0A0A !important; }
+  .text-dark-navy, .text-dark-navy * { color: #111326 !important; }
+}
+
+/* Recommended Monthly SEO Services */
+.monthly-list-styles ol,
+.monthly-list-styles ul {
+  list-style: none;
+  counter-reset: monthly;
+  padding: 0;
+  margin: 0;
+  margin-top: 1.5rem;
+  font-family: var(--font-sans), sans-serif;
+}
+.monthly-list-styles li {
+  position: relative;
+  padding-left: 3.8rem;
+  padding-bottom: 1.2rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid #111;
+  counter-increment: monthly;
+}
+.monthly-list-styles li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.monthly-list-styles li::before {
+  content: counter(monthly, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.5rem;
+  text-align: right;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #111;
+  line-height: 1.1;
+  font-family: inherit;
+}
+.monthly-list-styles li::after {
+  content: "";
+  position: absolute;
+  /* Number right edge is at 2.5rem. Arrow width is 40px (2.5rem).
+     To align right edges, left must be 0! */
+  left: 0;
+  top: 1.8rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  /* M5 5 to 22 22, so the arrow tip is flush with the right edge */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230057FF' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 6l16 16V10M22 22H10'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.monthly-list-styles p {
+  margin: 0;
+  font-size: 1.08rem;
+  color: #111;
+  line-height: 1.6;
+}
+.monthly-list-styles p strong,
+.monthly-list-styles h3,
+.monthly-list-styles h4 {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 0.1rem;
+  line-height: 1.2;
+}
+
+/* Conclusion and standard prose */
+.prose-report {
+  color: #111;
+  font-size: 18.4px;
+  line-height: 1.6;
+  font-family: var(--font-sans), sans-serif;
+}
+.prose-report p {
+  margin-bottom: 19.2px;
+}
+.prose-report p:last-child {
+  margin-bottom: 0;
+}
+.prose-report h2 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #111;
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+.prose-report h3 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #111;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+.prose-report ul {
+  list-style-type: disc;
+  padding-left: 32px;
+  margin-bottom: 8px;
+}
+.prose-report ul:last-child {
+  margin-bottom: 0;
+}
+.prose-report ol {
+  list-style-type: decimal;
+  padding-left: 56px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+.prose-report ol:last-child {
+  margin-bottom: 0;
+}
+.prose-report ol li {
+  margin-bottom: 16px;
+  padding-left: 8px;
+}
+.prose-report ol li:last-child {
+  margin-bottom: 0;
+}
+.prose-report ul li {
+  margin-bottom: 8px;
+  padding-left: 8px;
+}
+.prose-report ul li:last-child {
+  margin-bottom: 0;
+}
+.prose-report strong {
+  font-weight: bold;
+  color: inherit;
+}
+
+.prose strong, .prose b {
+  color: inherit;
+  font-weight: 700;
+}
+
+/* Ensure floated images have spacing from text */
+.prose img[style*="float: left"],
+.prose-report img[style*="float: left"],
+.prose img[style*="margin: 0px auto 0px 0px"],
+.prose-report img[style*="margin: 0px auto 0px 0px"],
+.prose img[style*="margin: 0 auto 0 0"],
+.prose-report img[style*="margin: 0 auto 0 0"] {
+  margin-right: 2.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.prose img[style*="float: right"],
+.prose-report img[style*="float: right"],
+.prose img[style*="margin: 0px 0px 0px auto"],
+.prose-report img[style*="margin: 0px 0px 0px auto"],
+.prose img[style*="margin: 0 0 0 auto"],
+.prose-report img[style*="margin: 0 0 0 auto"] {
+  margin-left: 2.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Fix for collapsing empty paragraphs when users press Enter */
+.prose p:empty::after,
+.prose-report p:empty::after,
+.ProseMirror p:empty::after {
+  content: "\00a0";
+}
+.prose p:has(> br:only-child), 
+.prose-report p:has(> br:only-child) {
+  min-height: 1.5em;
+}
+
+/* Hide scrollbars but allow scrolling */
+.custom-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.custom-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Remove underlines from all rich text links */
+.prose a, .prose-report a {
+  text-decoration: none !important;
+}
+
+/* Custom blockquote styling for Live Preview only */
+#live-preview-container blockquote {
+  border-left: 4px solid #0057FF !important;
+  background-color: var(--card) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  padding: 1.5rem 2rem !important;
+  margin: 1.5rem 0 !important;
+  border-radius: 0 !important;
+  font-style: normal !important;
+  quotes: none !important;
+  color: inherit !important;
+}
+
+.dark #live-preview-container blockquote {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-left-color: #6366f1 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* =========================================================
+   DESIGN SANDBOX - CONCEPT 1: The Pathway (Timeline)
+   ========================================================= */
+.concept-1-styles ol {
+  list-style: none;
+  counter-reset: pathway;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+/* The vertical connecting line */
+.concept-1-styles ol::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 24px; /* Center of the 48px circle */
+  width: 2px;
+  background: #e2e8f0;
+  z-index: 0;
+}
+.concept-1-styles li {
+  position: relative;
+  padding-left: 80px;
+  margin-bottom: 2.5rem;
+  z-index: 1;
+}
+.concept-1-styles li::before {
+  content: counter(pathway);
+  counter-increment: pathway;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 48px;
+  height: 48px;
+  background: white;
+  border: 2px solid #0057FF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0057FF;
+  box-shadow: 0 4px 6px -1px rgba(0, 87, 255, 0.2);
+}
+.concept-1-styles p:first-child {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 0.5rem 0;
+  padding-top: 0.4rem; /* Align text with circle */
+}
+.concept-1-styles p:last-child {
+  font-size: 1.05rem;
+  color: #475569;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =========================================================
+   DESIGN SANDBOX - CONCEPT 2: The Grid Matrix (Cards)
+   ========================================================= */
+.concept-2-styles ol {
+  list-style: none;
+  counter-reset: matrix;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.concept-2-styles li {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  position: relative;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  break-inside: avoid-column;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  transform: translateZ(0); /* Hack to force atomic rendering block in columns */
+}
+.concept-2-styles li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 87, 255, 0.1);
+  border-color: #0057FF;
+}
+.concept-2-styles li::before {
+  content: counter(matrix, decimal-leading-zero);
+  counter-increment: matrix;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #f1f5f9; /* Very faint number */
+  line-height: 1;
+  z-index: 0;
+}
+.concept-2-styles li > *:first-child,
+.concept-2-styles li > *:first-child p,
+.concept-2-styles li > *:first-child strong {
+  position: relative;
+  z-index: 1;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 0.75rem 0;
+  letter-spacing: -0.02em;
+  padding-right: 2rem; /* Leave room for big number */
+  display: block;
+}
+.concept-2-styles li > *:not(:first-child),
+.concept-2-styles li > *:not(:first-child) p,
+.concept-2-styles li > div,
+.concept-2-styles li > div p {
+  position: relative;
+  z-index: 1;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: #334155;
+  line-height: 1.7;
+  margin: 0;
+}
+.concept-2-styles li > div p {
+  margin-bottom: 0.75rem;
+}
+.concept-2-styles li > div p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   DESIGN SANDBOX - CONCEPT 3: The Split Focus (Editorial)
+   ========================================================= */
+.concept-3-styles ol {
+  list-style: none;
+  counter-reset: split;
+  padding: 0;
+  margin: 0;
+}
+.concept-3-styles li {
+  position: relative;
+  border-left: 4px solid #f1f5f9;
+  padding-left: 2rem;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.3s ease;
+  break-inside: avoid-column;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  transform: translateZ(0); /* Hack to force atomic rendering block in columns */
+}
+.concept-3-styles li:hover {
+  border-color: #0057FF;
+}
+.concept-3-styles li::before {
+  content: counter(split, decimal-leading-zero);
+  counter-increment: split;
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0057FF;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+.concept-3-styles li > *:first-child,
+.concept-3-styles li > *:first-child p,
+.concept-3-styles li > *:first-child strong {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.02em;
+  display: block;
+}
+.concept-3-styles li > *:not(:first-child),
+.concept-3-styles li > div {
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: #334155;
+  line-height: 1.5;
+}
+.concept-3-styles li p {
+  margin: 0 0 0.75rem 0;
+}
+.concept-3-styles li p:empty {
+  min-height: 1.7rem;
+}
+.concept-3-styles li p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   TIPTAP TABLE STYLING (BLACK/WHITE ITALIC)
+   ========================================================= */
+.ProseMirror table,
+#live-preview-container table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 0.5rem 0 !important;
+  background: #f4f5f7 !important;
+  border: 1px solid #000 !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+  box-shadow: none !important;
+  table-layout: fixed !important;
+}
+
+.ProseMirror th,
+.ProseMirror td,
+#live-preview-container th,
+#live-preview-container td {
+  min-width: 1em !important;
+  padding: 0.75rem 1rem !important;
+  text-align: left !important;
+  border: 1px solid #000 !important;
+  position: relative !important;
+}
+
+/* Header Styling */
+.ProseMirror th,
+#live-preview-container th {
+  background-color: #111 !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  font-size: 0.9rem !important;
+  border-bottom: 1px solid #000 !important;
+}
+
+/* Force white text on any elements (like <p> or <span>) inside headers */
+.ProseMirror th *,
+#live-preview-container th * {
+  color: #fff !important;
+}
+
+/* Cell Styling */
+.ProseMirror td,
+#live-preview-container td {
+  color: #111 !important;
+  font-size: 0.875rem !important;
+  background-color: transparent !important;
+}
+
+/* Selected cells during drag */
+.ProseMirror .selectedCell:after {
+  z-index: 2;
+  position: absolute;
+  content: "";
+  left: 0; right: 0; top: 0; bottom: 0;
+  background: rgba(0, 87, 255, 0.15);
+  pointer-events: none;
+}
+.ProseMirror .column-resize-handle {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: -2px;
+  width: 4px;
+  background-color: #0057FF;
+  pointer-events: none;
+}
+
+/* For Dark Mode Editor */
+.dark .ProseMirror table {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.dark .ProseMirror th {
+  background-color: #000;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.dark .ProseMirror td {
+  color: #fafafa;
+  border: 1px solid rgba(255,255,255,0.2);
+}

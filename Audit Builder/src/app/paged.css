@@ -1,0 +1,54 @@
+@media print {
+  @page {
+    size: 850px 1100px;
+    margin: 116px 0 120px 0; /* Space for Header and Footer */
+  }
+
+  @page {
+    @top-center {
+      content: element(header);
+    }
+    @bottom-center {
+      content: element(footer);
+    }
+  }
+
+  @page cover {
+    margin: 0;
+    @top-center { content: none; }
+    @bottom-center { content: none; }
+  }
+
+  @page toc {
+    margin: 0;
+    @top-center { content: none; }
+    @bottom-center { content: none; }
+  }
+
+  .page-cover {
+    page: cover;
+  }
+  
+  .page-toc {
+    page: toc;
+  }
+
+  .pagedjs-header {
+    position: running(header);
+    width: 850px;
+  }
+
+  .pagedjs-footer {
+    position: running(footer);
+    width: 850px;
+  }
+  
+  .paged-page-number::before {
+    content: counter(page);
+  }
+
+  /* Hide print actions */
+  .print-actions {
+    display: none !important;
+  }
+}

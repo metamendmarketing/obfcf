@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { background: #333; display: flex; align-items: center; padding: 50px; overflow-x: auto; overflow-y: hidden; margin: 0; }
+  .preview-wrapper {
+    height: 1100px;
+    column-width: 850px;
+    column-gap: 40px;
+    column-fill: auto;
+  }
+  .page-visual {
+    /* Since columns don't have backgrounds, we can apply the background to the elements or use a repeating background on the wrapper */
+  }
+  .content {
+    background: white;
+    padding: 50px;
+  }
+</style>
+</head>
+<body>
+  <div class="preview-wrapper">
+    <div class="content">
+      <h1 style="font-size: 5rem;">Page 1 Header</h1>
+      <div style="height: 600px; background: lightblue; margin-bottom: 50px;">Block 1</div>
+      <div style="height: 600px; background: lightgreen; margin-bottom: 50px;">Block 2</div>
+      <div style="height: 600px; background: lightcoral;">Block 3</div>
+    </div>
+  </div>
+</body>
+</html>

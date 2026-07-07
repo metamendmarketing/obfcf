@@ -75,23 +75,35 @@ function setupInteractions() {
   });
 }
 
-let payloadBaseUrl = 'http://localhost:3000';
+let payloadBaseUrl = 'https://obfcf.vercel.app';
 
 async function fetchPayloadData(endpoint) {
-  try {
-    const res = await fetch(`http://localhost:3000/api/${endpoint}`);
-    if (res.ok) {
-      payloadBaseUrl = 'http://localhost:3000';
-      return res;
-    }
-  } catch (e) {
-    // Fallback to 3001 if 3000 was taken
-    const res = await fetch(`http://localhost:3001/api/${endpoint}`);
-    if (res.ok) {
-      payloadBaseUrl = 'http://localhost:3001';
-      return res;
+  // If running locally, check local servers first
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    try {
+      const res = await fetch(`http://localhost:3000/api/${endpoint}`);
+      if (res.ok) {
+        payloadBaseUrl = 'http://localhost:3000';
+        return res;
+      }
+    } catch (e) {
+      try {
+        const res = await fetch(`http://localhost:3001/api/${endpoint}`);
+        if (res.ok) {
+          payloadBaseUrl = 'http://localhost:3001';
+          return res;
+        }
+      } catch (e) {}
     }
   }
+
+  // Production (or fallback if local is off)
+  const res = await fetch(`https://obfcf.vercel.app/api/${endpoint}`);
+  if (res.ok) {
+    payloadBaseUrl = 'https://obfcf.vercel.app';
+    return res;
+  }
+  
   throw new Error("API not connected");
 }
 

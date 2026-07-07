@@ -1,0 +1,33 @@
+alt tag spam - Alt tag is not representative of the image. Because the content has keywords that are not descriptive of the image, it could be flagged as spam.
+
+broken industry page - Some of the industry landing pages have a broken style that is distorting the images and content creating a bad user experience and effect site trust.
+
+broken search results - When performing a search, you are presented with a massive logo that breaks the page before providing inaccurate search results. This effects user trust. 
+
+broken site structure - The current site structure contains forward directories however there are no category of top-level page content. For example, the application folder that contains printer security content derives as a 404 creating a break in page flow and breadcrumbs. 
+
+category content - All category pages are lacking content. This prevents the search engine from racing the site for high value keywords related to the core product categories. This also present s the ability to create internal licking and overall site relevance.  
+
+equity loss - Many of Valitr’s past acquisitions are not redirecting to the main site. These sites still have quality back linking and foaming authority that could be redirected to regain the equity that is currently being lost. 
+
+external asset takes off site no way back - Many of the site's assets, specifically the pdf’s, link off site with no way back to the main site. This can chat a traffic leak and these assets will not be credited to the site. 
+
+FAQ page indexed but not linked from website - There are many pages that are not navigable from the main navigation of subpages. However, these pages are still indexed with the search engines. 
+
+faq snippets - FAQ section does not contain semantic markup which it the most important element to a FAQ for search engines and LLM’s.
+
+hero image - The main “hero image” on the home page is pushing bauble content below the fold. This deceases the value of the content to the search engines and provide little value to the users as they do not contain strong calls to action or general benefit statements. 
+
+no case study site structure - While there are many case studies that are indexed in the search engines, there is no easy way to navigate to them. Additionally, the user experience for this section is weak and hard to navigate. 
+
+old site still indexed - Your old site contains invalid redirects, often passing through 5 or more 301’s before landing on the final destination. This is preventing the site form properly carrying over its equity and page authority while also keeping it indexed. Cleaning up the redirects and performing a “Google change of address request” in GSC is highly recommended. 
+
+old site still indexed - Same as above, however given this is a sub domain it will need to be separately authenticated in GSC before performing a “Google change of address request” and 301 redirect implementations. 
+
+product assets - The products assets are located off site and are not being accredited to the primary domain. 
+
+reviews missing markup (attached is an extra image)- The reviews on your home page are not properly markup with product reviews snippets. This prevents the search engine from show the star review in the SERP’s which creates a higher page impressions o click through ratio. 
+
+Speed - Site speed has a direct impact on rankings and conversion rate. This issue more important than ever with LLM’s and AI based search. 
+
+traffic leak - Current pdf’s contain references in the header to “Valmont Highway”. When a user sees this and performs a search for them, they are directed to a site that list your competitors with competing products. 
