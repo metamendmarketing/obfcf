@@ -34,6 +34,7 @@ export default buildConfig({
         pool: {
           connectionString: process.env.POSTGRES_URL || process.env.DATABASE_URL || '',
         },
+        push: true,
       })
     : sqliteAdapter({
         client: {
