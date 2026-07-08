@@ -506,9 +506,50 @@ a {
 }
 
 /* Responsive */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.mobile-menu-btn span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--color-primary);
+  border-radius: 3px;
+  transition: var(--transition);
+}
+
 @media (max-width: 768px) {
   .hero-title { font-size: 2.5rem; }
   .about-grid { grid-template-columns: 1fr; }
-  .nav-links { display: none; /* simple mobile nav override needed */ }
   .hero-actions { flex-direction: column; }
+  
+  .mobile-menu-btn {
+    display: flex;
+  }
+  
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    flex-direction: column;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+  }
+  
+  .nav-links.show-mobile {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
+

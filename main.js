@@ -20,11 +20,14 @@ function injectLayout() {
             <img src="/logo.png" alt="Oak Bay Firefighters Charitable Foundation Logo" />
           </a>
         </div>
-        <nav class="nav-links">
+        <div class="mobile-menu-btn" id="mobile-menu-btn">
+          <span></span><span></span><span></span>
+        </div>
+        <nav class="nav-links" id="nav-links">
           <a href="index.html">Home</a>
           <a href="about.html">About Us</a>
           <a href="projects.html">Projects</a>
-          <a href="https://www.canadahelps.org/en/charities/oak-bay-fire-fighters-charitable-foundation/" target="_blank" rel="noopener noreferrer" class="btn-primary">Donate</a>
+          <a href="https://www.canadahelps.org/en/charities/oak-bay-fire-fighters-charitable-foundation/" target="_blank" rel="noopener noreferrer" class="btn-primary donate-btn">Donate</a>
         </nav>
       </div>
     </header>
@@ -54,6 +57,14 @@ function setupInteractions() {
       link.classList.add('active');
     }
   });
+
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const navLinksContainer = document.getElementById('nav-links');
+  if (mobileBtn) {
+    mobileBtn.addEventListener('click', () => {
+      navLinksContainer.classList.toggle('show-mobile');
+    });
+  }
 
   const observerOptions = {
     root: null,
