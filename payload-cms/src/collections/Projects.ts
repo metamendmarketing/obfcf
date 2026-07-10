@@ -25,7 +25,7 @@ export const Projects: CollectionConfig = {
       required: false,
       label: 'Image URL',
       admin: {
-        description: 'Paste a public image link here (e.g. from Google Drive, Imgur, or Dropbox).',
+        description: 'HOW TO ADD AN IMAGE: 1) Upload your photo to Google Drive. 2) Right-click it → Share → set to "Anyone with the link" → Copy link. 3) Your link looks like: https://drive.google.com/file/d/FILE_ID/view — change it to: https://drive.google.com/uc?export=view&id=FILE_ID and paste it here.',
       },
     },
     {
