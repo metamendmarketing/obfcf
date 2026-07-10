@@ -152,10 +152,7 @@ async function fetchProjectsData() {
       const projects = projectsData.docs;
 
       projectsContainer.innerHTML = projects.map(project => {
-        let imgUrl = 'https://via.placeholder.com/800x500?text=No+Image';
-        if (project.mainImage && project.mainImage.url) {
-          imgUrl = project.mainImage.url.startsWith('http') ? project.mainImage.url : payloadBaseUrl + project.mainImage.url;
-        }
+        const imgUrl = project.imageUrl || 'https://placehold.co/800x500/1a1a2e/ffffff?text=No+Image';
         
         return `
         <div class="project-card">

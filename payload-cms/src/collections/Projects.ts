@@ -20,10 +20,13 @@ export const Projects: CollectionConfig = {
       required: true,
     },
     {
-      name: 'mainImage',
-      type: 'upload',
-      relationTo: 'media',
+      name: 'imageUrl',
+      type: 'text',
       required: false,
+      label: 'Image URL',
+      admin: {
+        description: 'Paste a public image link here (e.g. from Google Drive, Imgur, or Dropbox).',
+      },
     },
     {
       name: 'projectUrl',
