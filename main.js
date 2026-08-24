@@ -29,6 +29,7 @@ function injectLayout() {
           <a href="index.html">Home</a>
           <a href="about.html">About Us</a>
           <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
           <a href="https://www.canadahelps.org/en/charities/oak-bay-fire-fighters-charitable-foundation/" target="_blank" rel="noopener noreferrer" class="btn-primary donate-btn">Donate</a>
         </nav>
       </div>
