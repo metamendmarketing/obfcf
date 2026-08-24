@@ -8,7 +8,24 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body style="padding-top: 80px;">
-    <div id="navbar-placeholder"></div>
+    <header class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <a href="index.html">
+            <img src="/logo.png" alt="Oak Bay Firefighters Charitable Foundation Logo" />
+          </a>
+        </div>
+        <div class="mobile-menu-btn" id="mobile-menu-btn">
+          <span></span><span></span><span></span>
+        </div>
+        <nav class="nav-links" id="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html" class="active">About Us</a>
+          <a href="projects.html">Projects</a>
+          <a href="https://www.canadahelps.org/en/charities/oak-bay-fire-fighters-charitable-foundation/" target="_blank" rel="noopener noreferrer" class="btn-primary donate-btn">Donate</a>
+        </nav>
+      </div>
+    </header>
 
     <section class="section slide-up visible">
       <div class="container">
@@ -18,7 +35,9 @@
         </div>
         <div class="about-grid">
           <div class="about-text" id="about-content">
-            <p>Loading about us content...</p>
+            <p>The Oak Bay Firefighters Charitable Foundation (OBFCF) is a registered charity operated by the dedicated professional firefighters of Oak Bay.</p>
+            <p>Established in 2012, our foundation is 100% volunteer-run. We are committed to funding vital community programs, helping local families in need, supporting youth education and athletics, and improving public spaces like Firefighters Park.</p>
+            <p>Through community donations, corporate sponsorships, and charity events, we work year-round to ensure every dollar directly benefits the health, safety, and well-being of our community.</p>
           </div>
           <div class="about-stats">
             <div class="stat-card">
@@ -38,7 +57,11 @@
       </div>
     </section>
 
-    <div id="footer-placeholder"></div>
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2026 Oak Bay Firefighters Charitable Foundation. All rights reserved.</p>
+      </div>
+    </footer>
     <script type="module" src="./main.js"></script>
   </body>
 </html>

@@ -8,7 +8,24 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body style="padding-top: 80px;">
-    <div id="navbar-placeholder"></div>
+    <header class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <a href="index.html">
+            <img src="/logo.png" alt="Oak Bay Firefighters Charitable Foundation Logo" />
+          </a>
+        </div>
+        <div class="mobile-menu-btn" id="mobile-menu-btn">
+          <span></span><span></span><span></span>
+        </div>
+        <nav class="nav-links" id="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="projects.html" class="active">Projects</a>
+          <a href="https://www.canadahelps.org/en/charities/oak-bay-fire-fighters-charitable-foundation/" target="_blank" rel="noopener noreferrer" class="btn-primary donate-btn">Donate</a>
+        </nav>
+      </div>
+    </header>
 
     <section class="section bg-light slide-up visible">
       <div class="container">
@@ -18,12 +35,69 @@
           <p class="section-desc">See what we are working on to make Oak Bay a better place.</p>
         </div>
         <div class="projects-grid" id="projects-container">
-          <div class="loading-spinner"></div>
+          <div class="project-card">
+            <div class="project-img-container">
+              <img src="https://drive.google.com/thumbnail?id=1-OyakjA5u-KZGJmFWUy94aGT1gMwY7cF&sz=w2000" alt="BC Professional Fire Fighters’ Burn Fund" class="project-img" onerror="this.src='https://placehold.co/800x500/1a1a2e/ffffff?text=Burn+Fund'">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">BC Professional Fire Fighters’ Burn Fund</h3>
+              <p class="project-excerpt">The connection between firefighters and burn care runs deep. Each year, the Oak Bay Firefighters Charitable Foundation proudly supports the BC Professional Fire Fighters’ Burn Fund through contributions to both Bright Nights and the Burn Fund’s Burn Camp.</p>
+              <a href="contact.html" class="project-link">Learn More</a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img-container">
+              <img src="https://drive.google.com/thumbnail?id=1I9ne98s9L6m9NO8erqskzMopLFZTuHuH&sz=w2000" alt="Oak Bay High School Scoreboard" class="project-img" onerror="this.src='https://placehold.co/800x500/1a1a2e/ffffff?text=Scoreboard'">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Oak Bay High School Scoreboard</h3>
+              <p class="project-excerpt">The Oak Bay Firefighters Charitable Foundation was proud to support the addition of a new scoreboard at Oak Bay High School — an investment in athletics, school spirit and the experiences that bring students, families and our community together.</p>
+              <a href="contact.html" class="project-link">Learn More</a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img-container">
+              <img src="https://drive.google.com/thumbnail?id=1JF00JgLlup0exLVd_WOVghrDkerOA_e9&sz=w2000" alt="CFAX Santas Anonymous" class="project-img" onerror="this.src='https://placehold.co/800x500/1a1a2e/ffffff?text=Santas+Anonymous'">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">CFAX Santas Anonymous</h3>
+              <p class="project-excerpt">For generations, CFAX Santa’s Anonymous has helped make Christmas a little brighter for children and families throughout Greater Victoria. The Oak Bay Firefighters Charitable Foundation is proud to support that work and help ensure local families experience the joy of the holiday season.</p>
+              <a href="contact.html" class="project-link">Learn More</a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img-container">
+              <img src="https://drive.google.com/thumbnail?id=1-gROgZSsvm8HhIkOYx5aWsd1QsBc3NEJ&sz=w2000" alt="The Neonatal Intensive Care Unit (NICU)" class="project-img" onerror="this.src='https://placehold.co/800x500/1a1a2e/ffffff?text=NICU'">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">The Neonatal Intensive Care Unit (NICU) at Victoria General Hospital</h3>
+              <p class="project-excerpt">For more than a decade, firefighters across Greater Victoria have stood together in support of the Neonatal Intensive Care Unit (NICU) at Victoria General Hospital, collectively pledging $500,000 to help care for vulnerable infants.</p>
+              <a href="contact.html" class="project-link">Learn More</a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img-container">
+              <img src="https://drive.google.com/thumbnail?id=19BvZVxM2P9ZteeZjTAA0HNeNYC5zWWLo&sz=w2000" alt="Oak Bay High School Bursaries" class="project-img" onerror="this.src='https://placehold.co/800x500/1a1a2e/ffffff?text=Bursaries'">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Oak Bay High School Bursaries</h3>
+              <p class="project-excerpt">The Oak Bay Firefighters Charitable Foundation is proud to support local students as they take the next step in their educational journey through our annual bursary program, recognizing students who demonstrate leadership, integrity, and community service.</p>
+              <a href="contact.html" class="project-link">Learn More</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <div id="footer-placeholder"></div>
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2026 Oak Bay Firefighters Charitable Foundation. All rights reserved.</p>
+      </div>
+    </footer>
     <script type="module" src="./main.js"></script>
   </body>
 </html>

@@ -8,12 +8,29 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div id="navbar-placeholder"></div>
+    <header class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <a href="index.html">
+            <img src="/logo.png" alt="Oak Bay Firefighters Charitable Foundation Logo" />
+          </a>
+        </div>
+        <div class="mobile-menu-btn" id="mobile-menu-btn">
+          <span></span><span></span><span></span>
+        </div>
+        <nav class="nav-links" id="nav-links">
+          <a href="index.html" class="active">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="projects.html">Projects</a>
+          <a href="https://www.canadahelps.org/en/charities/oak-bay-fire-fighters-charitable-foundation/" target="_blank" rel="noopener noreferrer" class="btn-primary donate-btn">Donate</a>
+        </nav>
+      </div>
+    </header>
 
     <section class="hero fade-in">
       <div class="hero-content">
         <h1 class="hero-title">Protecting Our Community. <br/><span class="highlight">Empowering Our Future.</span></h1>
-        <p class="hero-subtitle">The Oak Bay Firefighters Charitable Foundation is dedicated to funding local initiatives, youth programs, and community projects.</p>
+        <p class="hero-subtitle">The Oak Bay Firefighters Charitable Foundation is dedicated to funding local initiatives, youth bursaries, healthcare equipment, and community projects.</p>
         <div class="hero-actions">
           <a href="projects.html" class="btn-secondary">View Our Projects</a>
           <a href="https://www.canadahelps.org/en/charities/oak-bay-fire-fighters-charitable-foundation/" target="_blank" rel="noopener noreferrer" class="btn-primary pulse">Support Our Mission</a>
@@ -22,19 +39,75 @@
       <div class="hero-decoration"></div>
     </section>
 
-    <section class="section bg-light slide-up visible">
+    <!-- Mission & Overview -->
+    <section class="section slide-up visible">
       <div class="container">
-        <div class="section-header">
-          <h2>Our Impact</h2>
-          <div class="divider"></div>
-          <p class="section-desc">See the difference your support makes in our community.</p>
-        </div>
-        <div class="infographic-container">
-          <img src="/impact.jpg" alt="Our $80,000 impact back into the community last year" class="infographic-img" onerror="this.src='https://via.placeholder.com/800x1000?text=Save+Infographic+as+impact.jpg+in+public+folder'">
+        <div class="mission-grid">
+          <div class="mission-text">
+            <h2>Dedicated to Service, Community & Compassion</h2>
+            <p>The Oak Bay Firefighters Charitable Foundation (OBFCF) is a registered charity operated on a 100% volunteer basis by the professional firefighters of Oak Bay, British Columbia.</p>
+            <p>Beyond emergency response, our members are dedicated to supporting programs that improve the quality of life for children, families, and seniors in our neighbourhood and throughout Greater Victoria.</p>
+            <a href="about.html" class="btn-secondary" style="margin-top: 0.5rem;">Learn More About Us</a>
+          </div>
+          <div class="mission-highlight-card">
+            <h3>Our Foundation at a Glance</h3>
+            <ul>
+              <li><span class="check-icon">✓</span> <div><strong>100% Volunteer Operated:</strong> Every dollar raised directly supports community programs with zero administrative overhead.</div></li>
+              <li><span class="check-icon">✓</span> <div><strong>Registered Non-Profit:</strong> CRA Registered Charity # 850474487RR0001 with full tax-deductible receipts issued.</div></li>
+              <li><span class="check-icon">✓</span> <div><strong>Decade of Impact:</strong> Proudly serving Oak Bay and Vancouver Island since 2012.</div></li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
-    <div id="footer-placeholder"></div>
+
+    <!-- Pillars of Impact -->
+    <section class="section bg-light slide-up visible">
+      <div class="container">
+        <div class="section-header">
+          <h2>Areas of Impact</h2>
+          <div class="divider"></div>
+          <p class="section-desc">How your generosity directly changes lives across our community.</p>
+        </div>
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <div class="pillar-icon">🎓</div>
+            <h3>Youth & Education</h3>
+            <p>Providing high school bursaries, scholarships, and athletic facilities like the Oak Bay High scoreboard to help local students reach their full potential.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-icon">🏥</div>
+            <h3>Healthcare & Critical Care</h3>
+            <p>Pledging $500,000 to the Victoria General Hospital Neonatal Intensive Care Unit (NICU) and supporting the BC Professional Fire Fighters' Burn Fund.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-icon">🤝</div>
+            <h3>Family & Community Support</h3>
+            <p>Delivering holiday relief through CFAX Santas Anonymous and funding community infrastructure such as the Oak Bay Firefighters Park.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact & Transparency Section -->
+    <section class="section slide-up visible">
+      <div class="container">
+        <div class="section-header">
+          <h2>Our Annual Impact</h2>
+          <div class="divider"></div>
+          <p class="section-desc">Over $80,000 invested directly back into the community last year.</p>
+        </div>
+        <div class="infographic-container">
+          <img src="/impact.jpg" alt="Our $80,000 impact back into the community last year" class="infographic-img">
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2026 Oak Bay Firefighters Charitable Foundation. All rights reserved.</p>
+      </div>
+    </footer>
     <script type="module" src="./main.js"></script>
   </body>
 </html>
