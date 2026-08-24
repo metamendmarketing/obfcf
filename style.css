@@ -365,10 +365,11 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.5;
-  flex: 1;
+  max-height: calc(1.5em * 3);
 }
 
 .project-link {
+  margin-top: auto;
   font-weight: 600;
   color: var(--color-primary);
   display: inline-flex;
