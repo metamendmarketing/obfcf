@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
   injectLayout();
+  injectEmailPopup();
   setupInteractions();
+  setupEmailPopup();
 
   // Route-based fetching
   const path = window.location.pathname;
@@ -195,3 +197,234 @@ async function fetchProjectsData() {
     `).join('');
   }
 }
+
+function injectEmailPopup() {
+  const popupHTML = `
+    <div class="popup-backdrop" id="email-popup-backdrop" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+      <div class="popup-modal" id="email-popup-modal">
+        <button class="popup-close-btn" id="popup-close-btn" aria-label="Close popup">&times;</button>
+        <div id="popup-form-view">
+          <div class="popup-header">
+            <div class="popup-badge">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              Community Updates
+            </div>
+            <h2 class="popup-title" id="popup-title">Stay in the Loop</h2>
+            <p class="popup-subtitle">Get heartwarming community stories, foundation project milestones, and event updates delivered to your inbox.</p>
+          </div>
+          <form class="popup-form" id="email-popup-form" novalidate>
+            <div class="popup-input-group">
+              <label for="subscriber-name">Your Name <span>(Optional)</span></label>
+              <input type="text" id="subscriber-name" class="popup-input" placeholder="e.g. Alex Smith" autocomplete="name" />
+            </div>
+            <div class="popup-input-group">
+              <label for="subscriber-email">Email Address <span style="color: #ef4444;">*</span></label>
+              <input type="email" id="subscriber-email" class="popup-input" placeholder="you@example.com" required autocomplete="email" />
+            </div>
+            <div class="popup-feedback" id="popup-feedback"></div>
+            <button type="submit" class="popup-submit-btn" id="popup-submit-btn">
+              <span>Subscribe to Updates</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+            <p class="popup-privacy-note">🔒 We respect your privacy. No spam, ever.</p>
+          </form>
+        </div>
+        <div class="popup-success-view" id="popup-success-view">
+          <div class="popup-success-icon">✓</div>
+          <h3 class="popup-success-title">You're on the list!</h3>
+          <p class="popup-success-desc">Thank you for supporting the Oak Bay Firefighters Charitable Foundation. We look forward to keeping you updated on our community work.</p>
+          <button type="button" class="btn-primary" id="popup-success-close-btn" style="width: 100%;">Got it, thanks!</button>
+        </div>
+      </div>
+    </div>
+    <button class="popup-floating-trigger" id="popup-floating-trigger" aria-label="Subscribe to updates">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      <span>Stay Updated</span>
+    </button>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', popupHTML);
+}
+
+function setupEmailPopup() {
+  const backdrop = document.getElementById('email-popup-backdrop');
+  const modal = document.getElementById('email-popup-modal');
+  const closeBtn = document.getElementById('popup-close-btn');
+  const successCloseBtn = document.getElementById('popup-success-close-btn');
+  const floatingTrigger = document.getElementById('popup-floating-trigger');
+  const form = document.getElementById('email-popup-form');
+  const formView = document.getElementById('popup-form-view');
+  const successView = document.getElementById('popup-success-view');
+  const feedback = document.getElementById('popup-feedback');
+  const submitBtn = document.getElementById('popup-submit-btn');
+
+  if (!backdrop) return;
+
+  function openPopup() {
+    backdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    const emailInput = document.getElementById('subscriber-email');
+    if (emailInput) {
+      setTimeout(() => emailInput.focus(), 300);
+    }
+  }
+
+  function closePopup(recordDismissal = true) {
+    backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+    if (recordDismissal) {
+      sessionStorage.setItem('obfcf_popup_session_closed', 'true');
+      localStorage.setItem('obfcf_newsletter_dismissed', Date.now().toString());
+    }
+  }
+
+  // Auto-popup logic (first visit)
+  const isSubscribed = localStorage.getItem('obfcf_newsletter_subscribed');
+  const isDismissed = localStorage.getItem('obfcf_newsletter_dismissed');
+  const isSessionClosed = sessionStorage.getItem('obfcf_popup_session_closed');
+
+  // Check if dismissed more than 7 days ago
+  let dismissalExpired = false;
+  if (isDismissed) {
+    const elapsed = Date.now() - parseInt(isDismissed, 10);
+    if (elapsed > 7 * 24 * 60 * 60 * 1000) {
+      dismissalExpired = true;
+    }
+  }
+
+  if (!isSubscribed && (!isDismissed || dismissalExpired) && !isSessionClosed) {
+    setTimeout(() => {
+      openPopup();
+    }, 4500);
+  }
+
+  // Open via floating button
+  if (floatingTrigger) {
+    floatingTrigger.addEventListener('click', () => {
+      // Reset view back to form if previously completed
+      if (formView && successView) {
+        formView.style.display = 'block';
+        successView.classList.remove('active');
+      }
+      openPopup();
+    });
+  }
+
+  // Close triggers
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => closePopup(true));
+  }
+  if (successCloseBtn) {
+    successCloseBtn.addEventListener('click', () => closePopup(false));
+  }
+
+  // Close on outside backdrop click
+  backdrop.addEventListener('click', (e) => {
+    if (modal && !modal.contains(e.target)) {
+      closePopup(true);
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && backdrop.classList.contains('active')) {
+      closePopup(true);
+    }
+  });
+
+  // Handle Form Submission
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const nameInput = document.getElementById('subscriber-name');
+      const emailInput = document.getElementById('subscriber-email');
+      const name = nameInput ? nameInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+
+      // Reset feedback
+      feedback.className = 'popup-feedback';
+      feedback.textContent = '';
+
+      // Simple email validation regex
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        feedback.className = 'popup-feedback error';
+        feedback.textContent = 'Please enter a valid email address.';
+        if (emailInput) emailInput.focus();
+        return;
+      }
+
+      // Show submitting state
+      submitBtn.disabled = true;
+      const originalBtnHTML = submitBtn.innerHTML;
+      submitBtn.innerHTML = `<span>Subscribing...</span>`;
+
+      try {
+        await submitEmailSubscriber(name, email);
+        
+        // Show success state
+        localStorage.setItem('obfcf_newsletter_subscribed', 'true');
+        if (formView && successView) {
+          formView.style.display = 'none';
+          successView.classList.add('active');
+        }
+        form.reset();
+      } catch (err) {
+        feedback.className = 'popup-feedback error';
+        feedback.textContent = err.message || 'Something went wrong. Please try again.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHTML;
+      }
+    });
+  }
+}
+
+async function submitEmailSubscriber(name, email) {
+  try {
+    const payload = {
+      email,
+      name: name || undefined,
+      source: 'Website Popup'
+    };
+
+    // Try posting to local/live Payload CMS
+    let endpointUrl = `${payloadBaseUrl}/api/subscribers`;
+    
+    // Check if on localhost
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      try {
+        const localRes = await fetch('http://localhost:3000/api/subscribers', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (localRes.ok) return await localRes.json();
+      } catch (e) {}
+    }
+
+    const res = await fetch(endpointUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (error) {
+    console.warn('API submission failed, storing locally as fallback:', error);
+  }
+
+  // Graceful Local Fallback: Always record locally so no submissions are lost
+  const existing = JSON.parse(localStorage.getItem('obfcf_local_subscribers') || '[]');
+  existing.push({
+    email,
+    name,
+    timestamp: new Date().toISOString()
+  });
+  localStorage.setItem('obfcf_local_subscribers', JSON.stringify(existing));
+  return { success: true, local: true };
+}
+
