@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     await fetchAboutData();
   } else if (path.includes('projects.html')) {
     await fetchProjectsData();
+  } else if (path.includes('project-detail.html')) {
+    await fetchSingleProjectData();
   }
 });
 
@@ -161,6 +163,11 @@ function resolveProjectUrl(project) {
   if (title.includes('santa')) return 'project-santas-anonymous.html';
   if (title.includes('nicu') || title.includes('neonatal')) return 'project-nicu.html';
   if (title.includes('bursar')) return 'project-bursaries.html';
+  
+  // Any newly added project in Payload CMS automatically gets its dynamic detail page
+  if (project.id) {
+    return `project-detail.html?id=${project.id}`;
+  }
   return 'projects.html';
 }
 
@@ -190,11 +197,67 @@ async function fetchProjectsData() {
             <a href="${projectHref}" ${isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''} class="project-link">Learn More</a>
           </div>
         </div>
-      `}).join('');
+      `;
+      }).join('');
     }
   } catch (error) {
     // Retain comprehensive static pre-rendered project cards
   }
 }
+
+async function fetchSingleProjectData() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const projectId = urlParams.get('id');
+
+  const titleEl = document.getElementById('project-title');
+  const imgEl = document.getElementById('project-img');
+  const bodyEl = document.getElementById('project-body');
+  const partnerCard = document.getElementById('partner-card');
+  const partnerLink = document.getElementById('partner-link');
+
+  if (!projectId) {
+    if (titleEl) titleEl.textContent = 'Project Not Specified';
+    if (bodyEl) bodyEl.innerHTML = '<p>Please select a project from our <a href="projects.html" class="highlight">Projects page</a>.</p>';
+    return;
+  }
+
+  try {
+    const projectsRes = await fetchPayloadData('projects');
+    const projectsData = await projectsRes.json();
+    const project = (projectsData.docs || []).find(p => String(p.id) === String(projectId));
+
+    if (project) {
+      document.title = `${project.title} | Oak Bay Firefighters Charitable Foundation`;
+      if (titleEl) titleEl.textContent = project.title;
+
+      if (imgEl && project.imageUrl) {
+        imgEl.src = project.imageUrl;
+        imgEl.alt = project.title;
+        imgEl.style.display = 'block';
+        imgEl.onerror = () => { imgEl.style.display = 'none'; };
+      }
+
+      if (bodyEl && project.excerpt) {
+        bodyEl.innerHTML = project.excerpt
+          .split('\n')
+          .filter(p => p.trim() !== '')
+          .map(p => `<p>${p.trim()}</p>`)
+          .join('');
+      }
+
+      if (partnerCard && partnerLink && project.projectUrl && project.projectUrl.trim() !== '') {
+        partnerLink.href = project.projectUrl;
+        partnerCard.style.display = 'block';
+      }
+    } else {
+      if (titleEl) titleEl.textContent = 'Project Not Found';
+      if (bodyEl) bodyEl.innerHTML = '<p>The requested project could not be found. View all our active initiatives on the <a href="projects.html" class="highlight">Projects page</a>.</p>';
+    }
+  } catch (err) {
+    if (titleEl) titleEl.textContent = 'Project Information';
+    if (bodyEl) bodyEl.innerHTML = '<p>Unable to load project details at this time. Please explore our work on the <a href="projects.html" class="highlight">Projects page</a>.</p>';
+  }
+}
+
 
 

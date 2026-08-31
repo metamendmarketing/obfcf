@@ -18,7 +18,8 @@ export default defineConfig({
         projectScoreboard: resolve(__dirname, 'project-scoreboard.html'),
         projectSantasAnonymous: resolve(__dirname, 'project-santas-anonymous.html'),
         projectNicu: resolve(__dirname, 'project-nicu.html'),
-        projectBursaries: resolve(__dirname, 'project-bursaries.html')
+        projectBursaries: resolve(__dirname, 'project-bursaries.html'),
+        projectDetail: resolve(__dirname, 'project-detail.html')
       }
     }
   }
