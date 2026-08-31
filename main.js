@@ -151,6 +151,19 @@ async function fetchAboutData() {
   }
 }
 
+function resolveProjectUrl(project) {
+  if (project.projectUrl && project.projectUrl.trim() !== '') {
+    return project.projectUrl;
+  }
+  const title = (project.title || '').toLowerCase();
+  if (title.includes('burn fund')) return 'project-burn-fund.html';
+  if (title.includes('scoreboard')) return 'project-scoreboard.html';
+  if (title.includes('santa')) return 'project-santas-anonymous.html';
+  if (title.includes('nicu') || title.includes('neonatal')) return 'project-nicu.html';
+  if (title.includes('bursar')) return 'project-bursaries.html';
+  return 'projects.html';
+}
+
 async function fetchProjectsData() {
   const projectsContainer = document.getElementById('projects-container');
   if (!projectsContainer) return;
@@ -163,7 +176,7 @@ async function fetchProjectsData() {
     if (projects && projects.length > 0) {
       projectsContainer.innerHTML = projects.map(project => {
         const imgUrl = project.imageUrl || 'https://placehold.co/800x500/1a1a2e/ffffff?text=No+Image';
-        const projectHref = project.projectUrl || 'projects.html';
+        const projectHref = resolveProjectUrl(project);
         const isExternal = projectHref.startsWith('http');
         
         return `
