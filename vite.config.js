@@ -13,7 +13,12 @@ export default defineConfig({
         about: resolve(__dirname, 'about.html'),
         projects: resolve(__dirname, 'projects.html'),
         contact: resolve(__dirname, 'contact.html'),
-        privacy: resolve(__dirname, 'privacy.html')
+        privacy: resolve(__dirname, 'privacy.html'),
+        projectBurnFund: resolve(__dirname, 'project-burn-fund.html'),
+        projectScoreboard: resolve(__dirname, 'project-scoreboard.html'),
+        projectSantasAnonymous: resolve(__dirname, 'project-santas-anonymous.html'),
+        projectNicu: resolve(__dirname, 'project-nicu.html'),
+        projectBursaries: resolve(__dirname, 'project-bursaries.html')
       }
     }
   }

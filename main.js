@@ -139,20 +139,15 @@ async function fetchAboutData() {
   try {
     const settingsRes = await fetchPayloadData('globals/site-settings');
     const settings = await settingsRes.json();
-      if (settings.aboutUsText) {
-        // Split by newlines and wrap each paragraph in <p> tags so formatting is preserved
-        aboutContainer.innerHTML = settings.aboutUsText
-          .split('\n')
-          .filter(text => text.trim() !== '')
-          .map(text => `<p>${text.trim()}</p>`)
-          .join('');
-      }
-      return;
+    if (settings && settings.aboutUsText) {
+      aboutContainer.innerHTML = settings.aboutUsText
+        .split('\n')
+        .filter(text => text.trim() !== '')
+        .map(text => `<p>${text.trim()}</p>`)
+        .join('');
+    }
   } catch (error) {
-    aboutContainer.innerHTML = `
-      <p>The Oak Bay Firefighters Charitable Foundation (OBFCF) is a registered charity operated by the Oak Bay Professional Firefighters Association.</p>
-      <p>Our mission is to support programs that benefit the local community, including financial and social support for families, youth extracurriculars, and community infrastructure like the Firefighters Park.</p>
-    `;
+    // Retain comprehensive static pre-rendered HTML
   }
 }
 
@@ -163,10 +158,13 @@ async function fetchProjectsData() {
   try {
     const projectsRes = await fetchPayloadData('projects');
     const projectsData = await projectsRes.json();
-      const projects = projectsData.docs;
+    const projects = projectsData.docs;
 
+    if (projects && projects.length > 0) {
       projectsContainer.innerHTML = projects.map(project => {
         const imgUrl = project.imageUrl || 'https://placehold.co/800x500/1a1a2e/ffffff?text=No+Image';
+        const projectHref = project.projectUrl || 'projects.html';
+        const isExternal = projectHref.startsWith('http');
         
         return `
         <div class="project-card">
@@ -176,37 +174,13 @@ async function fetchProjectsData() {
           <div class="project-content">
             <h3 class="project-title">${project.title}</h3>
             <p class="project-excerpt">${project.excerpt}</p>
-            <a href="${project.projectUrl || 'contact.html'}" ${project.projectUrl && project.projectUrl.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="project-link">Learn More</a>
+            <a href="${projectHref}" ${isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''} class="project-link">Learn More</a>
           </div>
         </div>
       `}).join('');
-      return;
+    }
   } catch (error) {
-    const mockProjects = [
-      {
-        title: "Firefighters Park Rebuild",
-        excerpt: "Funding the complete rebuild of the playground at Firefighters Park in Oak Bay to create a fully accessible, fire-themed community space.",
-        imageUrl: "https://images.unsplash.com/photo-1595206133361-119159937a04?auto=format&fit=crop&q=80&w=800&h=500"
-      },
-      {
-        title: "Youth Bursary Program",
-        excerpt: "Providing scholarships and bursaries to local high school students pursuing higher education and trades.",
-        imageUrl: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800&h=500"
-      }
-    ];
-
-    projectsContainer.innerHTML = mockProjects.map(project => `
-      <div class="project-card">
-        <div class="project-img-container">
-          <img src="${project.imageUrl}" alt="${project.title}" class="project-img">
-        </div>
-        <div class="project-content">
-          <h3 class="project-title">${project.title}</h3>
-          <p class="project-excerpt">${project.excerpt}</p>
-          <a href="contact.html" class="project-link">Learn More</a>
-        </div>
-      </div>
-    `).join('');
+    // Retain comprehensive static pre-rendered project cards
   }
 }
 
